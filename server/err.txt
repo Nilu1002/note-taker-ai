@@ -1,0 +1,9 @@
+Server is running on http://localhost:3001
+UserInfoError: Invalid Credentials
+    at E:\note-taker-ai\server\node_modules\passport-google-oauth20\lib\strategy.js:97:21
+    at passBackControl (E:\note-taker-ai\server\node_modules\oauth\lib\oauth2.js:132:9)
+    at IncomingMessage.<anonymous> (E:\note-taker-ai\server\node_modules\oauth\lib\oauth2.js:157:7)
+    at IncomingMessage.emit (node:events:531:35)
+    at IncomingMessage.emit (node:domain:488:12)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)

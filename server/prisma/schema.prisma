@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String            @id @default(cuid())
+  email               String            @unique
+  name                String?
+  googleId            String            @unique
+  profilePictureUrl   String?
+  googleCalendar      GoogleCalendar?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+}
+
+model GoogleCalendar {
+  id                  String    @id @default(cuid())
+  user                User      @relation(fields: [userId], references: [id])
+  userId              String    @unique
+  refreshToken        String
+  syncToken           String?
+  resourceId          String?
+  expiration          BigInt?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  events              CalendarEvent[]
+}
+
+model CalendarEvent {
+  id              String          @id @default(cuid())
+  googleCalendar  GoogleCalendar  @relation(fields: [calendarId], references: [id])
+  calendarId      String
+  googleEventId   String          @unique
+  summary         String
+  description     String?
+  startTime       DateTime
+  endTime         DateTime
+  meetLink        String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
